@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f5f5">
+
+    <title>PayFlow - Panou de plati</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+
+    <!-- STRUCTURA PAGINII -->
+    <div class="structura-pagina">
+
+        <!-- MENIUL DIN STANGA -->
+        <aside class="meniu-lateral" aria-label="Navigare">
+
+            <!-- LOGO -->
+            <a class="sigla" href="#dashboard" aria-label="PayFlow, acasa">
+                <span class="simbol-sigla">P</span>
+                PayFlow<span class="punct-sigla">.</span>
+            </a>
+
+            <!-- LINKURI MENIU -->
+            <nav aria-label="Meniu principal">
+
+                <a class="link-navigare activ" href="#dashboard">
+                    <span aria-hidden="true">◫</span>
+                    Prezentare generala
+                </a>
+
+                <a class="link-navigare" href="#transactions">
+                    <span aria-hidden="true">⇄</span>
+                    Tranzactii
+                </a>
+
+                <a class="link-navigare" href="#new-payment">
+                    <span aria-hidden="true">＋</span>
+                    Plata noua
+                </a>
+
+            </nav>
+
+            <!-- CONT DEMO -->
+            <div class="subsol-meniu">
+
+                <span class="avatar">D</span>
+
+                <span>
+                    <strong>Cont demonstrativ</strong>
+                    <small>Mod de testare</small>
+                </span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTINUTUL DIN DREAPTA -->
+        <div class="continut">
+
+            <!-- BARA DE SUS -->
+            <header class="bara-superioara">
+
+                <span class="text-supratitlu">
+                    PERSONAL / PREZENTARE GENERALA
+                </span>
+
+                <span class="eticheta-demo">
+                    <span class="punct-stare"></span>
+                    Mod demonstrativ
+                </span>
+
+            </header>
+
+
+            <!-- PAGINA PRINCIPALA -->
+            <main id="dashboard">
+
+                <!-- TITLUL PAGINII -->
+                <div class="antet-pagina">
+
+                    <div>
+                        <p class="text-supratitlu">
+                            SITUATIA TA FINANCIARA DINTR-O PRIVIRE
+                        </p>
+
+                        <h1>Ne bucuram sa te revedem</h1>
+
+                        <p class="text-estompat">
+                            Iata ce se intampla cu platile tale.
+                        </p>
+                    </div>
+
+                    <a class="buton-principal" href="#new-payment">
+                        ＋ Plata noua
+                    </a>
+
+                </div>
+
+
+                <!-- STATISTICI -->
+                <section class="statistici" aria-label="Statistici plati">
+
+                    <!-- SUMA TOTALA -->
+                    <article class="card-statistica evidentiat">
+
+                        <p>
+                            Volum demonstrativ
+                            <span aria-hidden="true">↗</span>
+                        </p>
+
+                        <strong id="total-amount">€0.00</strong>
+
+                        <small>
+                            Volumul tranzactiilor demonstrative
+                        </small>
+
+                        <div class="cerc-decorativ"></div>
+
+                    </article>
+
+
+                    <!-- NUMAR TRANZACTII -->
+                    <article class="card-statistica">
+
+                        <p>
+                            Tranzactii
+                            <span aria-hidden="true">⇄</span>
+                        </p>
+
+                        <strong id="transaction-count">0</strong>
+
+                        <small>
+                            Din API si din acest browser
+                        </small>
+
+                    </article>
+
+
+                    <!-- PLATI NOI -->
+                    <article class="card-statistica">
+
+                        <p>
+                            Plati noi
+                            <span aria-hidden="true">✦</span>
+                        </p>
+
+                        <strong id="new-count">0</strong>
+
+                        <small>
+                            Create in aceasta sesiune
+                        </small>
+
+                    </article>
+
+                </section>
+
+
+                <!-- PARTEA DE JOS A PAGINII -->
+                <div class="grila-inferioara">
+
+
+                    <!-- LISTA DE TRANZACTII -->
+                    <section
+                        class="panou tranzactii"
+                        id="transactions"
+                        aria-labelledby="transactions-title"
+                    >
+
+                        <!-- TITLU LISTA -->
+                        <div class="antet-sectiune">
+
+                            <div>
+                                <h2 id="transactions-title">
+                                    Tranzactii
+                                </h2>
+
+                                <p class="text-estompat">
+                                    Cele mai recente activitati
+                                </p>
+                            </div>
+
+                            <span class="eticheta">
+                                API REST PUBLIC
+                            </span>
+
+                        </div>
+
+
+                        <!-- CAUTARE TRANZACTII -->
+                        <div class="zona-cautare">
+
+                            <label for="search">
+                                Cauta tranzactii
+                            </label>
+
+                            <input
+                                id="search"
+                                name="search"
+                                type="search"
+                                placeholder="⌕ Cauta dupa destinatar sau descriere..."
+                            >
+
+                        </div>
+
+
+                        <!-- MESAJ INCARCARE SAU EROARE -->
+                        <p
+                            id="list-status"
+                            class="stare-lista"
+                            role="status"
+                            aria-live="polite"
+                        >
+                            Se incarca tranzactiile...
+                        </p>
+
+
+                        <!-- AICI JAVASCRIPT ADAUGA TRANZACTIILE -->
+                        <ul
+                            id="transaction-list"
+                            class="lista-tranzactii"
+                            aria-label="Lista tranzactiilor"
+                        >
+                        </ul>
+
+                    </section>
+
+
+
+                    <!-- FORMULAR PLATA NOUA -->
+                    <section
+                        class="panou panou-plata"
+                        id="new-payment"
+                        aria-labelledby="payment-title"
+                    >
+
+                        <!-- TITLU FORMULAR -->
+                        <div class="antet-sectiune">
+
+                            <div>
+                                <h2 id="payment-title">
+                                    Trimite bani
+                                </h2>
+
+                                <p class="text-estompat">
+                                    Trimite un POST demonstrativ
+                                </p>
+                            </div>
+
+                            <span
+                                class="pictograma-trimitere"
+                                aria-hidden="true"
+                            >
+                                ↗
+                            </span>
+
+                        </div>
+
+
+                        <!-- FORMULAR -->
+                        <form id="payment-form">
+
+
+                            <!-- NUME DESTINATAR -->
+                            <label for="recipient">
+                                Numele destinatarului
+                            </label>
+
+                            <input
+                                id="recipient"
+                                name="recipient"
+                                type="text"
+                                placeholder="Ex.: Alex Popescu"
+                                maxlength="80"
+                                required
+                            >
+
+
+                            <!-- SUMA -->
+                            <label for="amount">
+                                Suma (EUR)
+                            </label>
+
+                            <div class="camp-suma">
+
+                                <span>€</span>
+
+                                <input
+                                    id="amount"
+                                    name="amount"
+                                    type="number"
+                                    placeholder="0.00"
+                                    min="0.01"
+                                    max="1000000"
+                                    step="0.01"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- DESCRIERE -->
+                            <label for="description">
+                                Descriere
+                            </label>
+
+                            <textarea
+                                id="description"
+                                name="description"
+                                placeholder="Care este scopul acestei plati?"
+                                maxlength="200"
+                                rows="3"
+                                required
+                            ></textarea>
+
+
+                            <!-- MESAJ DUPA TRIMITERE -->
+                            <p
+                                id="form-message"
+                                class="mesaj-formular"
+                                role="alert"
+                                aria-live="polite"
+                            ></p>
+
+
+                            <!-- BUTON TRIMITERE -->
+                            <button
+                                id="submit-button"
+                                class="buton-principal latime-completa"
+                                type="submit"
+                            >
+                                Trimite plata
+                                <span aria-hidden="true">→</span>
+                            </button>
+
+
+                            <!-- NOTA -->
+                            <p class="nota-formular">
+                                🔒 Nu se transfera bani reali.
+                            </p>
+
+                        </form>
+
+                    </section>
+
+                </div>
+
+            </main>
+
+
+            <!-- FOOTER -->
+            <footer>
+                © 2026 PayFlow - Toate drepturile rezervate.
+            </footer>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
